@@ -1,44 +1,5 @@
 input.onButtonPressed(Button.AB, function () {
     Cursor.delete()
-    basic.showLeds(`
-        # # # # #
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        `)
-    basic.pause(100)
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        . . . . .
-        . . . . .
-        . . . . .
-        `)
-    basic.pause(100)
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        . . . . .
-        . . . . .
-        `)
-    basic.pause(100)
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        . . . . .
-        `)
-    basic.pause(100)
-    basic.showLeds(`
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        # # # # #
-        `)
     control.reset()
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
@@ -47,10 +8,24 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     } else {
         music.play(music.tonePlayable(WhatNote, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
     }
+    Note2 = game.createSprite(Cursor.get(LedSpriteProperty.X), Cursor.get(LedSpriteProperty.Y))
 })
+let Note2: game.LedSprite = null
 let WhatNote = 0
 let Cursor: game.LedSprite = null
 Cursor = game.createSprite(4, 0)
+basic.forever(function () {
+    basic.pause(150)
+    if (Cursor.get(LedSpriteProperty.Y) == 4 && input.buttonIsPressed(Button.A)) {
+        basic.pause(150)
+        Cursor.set(LedSpriteProperty.Y, 0)
+    } else {
+        if (input.buttonIsPressed(Button.A)) {
+            basic.pause(150)
+            Cursor.change(LedSpriteProperty.Y, 1)
+        }
+    }
+})
 basic.forever(function () {
     if (Cursor.get(LedSpriteProperty.X) == 4 && input.buttonIsPressed(Button.B)) {
         basic.pause(150)
@@ -77,16 +52,5 @@ basic.forever(function () {
     }
     if (Cursor.get(LedSpriteProperty.Y) == 4) {
         WhatNote = 0
-    }
-})
-basic.forever(function () {
-    if (Cursor.get(LedSpriteProperty.Y) == 4 && input.buttonIsPressed(Button.A)) {
-        basic.pause(150)
-        Cursor.set(LedSpriteProperty.Y, 0)
-    } else {
-        if (input.buttonIsPressed(Button.A)) {
-            basic.pause(150)
-            Cursor.change(LedSpriteProperty.Y, 1)
-        }
     }
 })
