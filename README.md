@@ -1,24 +1,17 @@
+#micro:midi
 
-> Open this page at [https://johnnywiththethinkpad.github.io/micromidi/](https://johnnywiththethinkpad.github.io/micromidi/)
+An open-source, embedded Digital Audio Workstation (DAW) and loop sequencer built for the **micro:bit v2** using Microsoft MakeCode.
+##Control Layout
 
-## Use as Extension
+The system utilizes the on-board micro:bit physical inputs to navigate the interface and manage the audio sequencer state:
 
-This repository can be added as an **extension** in MakeCode.
+* **Button B**: Moves the visual cursor along the **X-axis** (horizontal grid navigation).
+* **Button A**: Moves the visual cursor along the **Y-axis** (vertical grid navigation).
+* **Touch Logo**: **Places a note** at the current cursor coordinates.
+* **Button A + B (Combined)**: **Wipes all notes** clean from the memory grid to start a fresh track.
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/johnnywiththethinkpad/micromidi** and import
-
-## Edit this project
-
-To edit this repository in MakeCode.
-
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/johnnywiththethinkpad/micromidi** and click import
-
-#### Metadata (used for search, rendering)
-
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+##Development 
+1. [x] Core grid environment configuration & XY cursor movement coordinates.
+2. [ ] Note variable mapping and dynamic audio frequency routing.
+3. [ ] Memory List Array storage allocation for active step sequencing.
+4. [ ] Background clock sync for looped loop playback based on custom BPM variables.
