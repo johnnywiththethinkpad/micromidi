@@ -4,6 +4,7 @@ input.onButtonPressed(Button.AB, function () {
 })
 input.onGesture(Gesture.Shake, function () {
     gottasweepsweepsweep = game.createSprite(4, 0)
+    Cursor.set(LedSpriteProperty.X, 50)
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (Cursor.get(LedSpriteProperty.Y) == 4) {
