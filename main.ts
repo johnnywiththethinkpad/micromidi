@@ -2,6 +2,9 @@ input.onButtonPressed(Button.AB, function () {
     Cursor.delete()
     control.reset()
 })
+input.onGesture(Gesture.Shake, function () {
+    gottasweepsweepsweep = game.createSprite(4, 0)
+})
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (Cursor.get(LedSpriteProperty.Y) == 4) {
         music.play(music.createSoundExpression(WaveShape.Square, 200, 1, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
@@ -12,6 +15,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 })
 let Note2: game.LedSprite = null
 let WhatNote = 0
+let gottasweepsweepsweep: game.LedSprite = null
 let Cursor: game.LedSprite = null
 Cursor = game.createSprite(4, 0)
 basic.forever(function () {
