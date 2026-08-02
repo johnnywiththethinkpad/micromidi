@@ -79,7 +79,7 @@ def on_gesture_shake():
 input.on_gesture(Gesture.SHAKE, on_gesture_shake)
 
 def on_logo_pressed():
-    global Note2
+    global Note2, notes
     if Cursor is None:
         return
     if Cursor.get(LedSpriteProperty.Y) == 4:
@@ -95,12 +95,25 @@ def on_logo_pressed():
     else:
         music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
             music.PlaybackMode.UNTIL_DONE)
-    Note2 = game.create_sprite(Cursor.get(LedSpriteProperty.X),
-        Cursor.get(LedSpriteProperty.Y))
+    x = Cursor.get(LedSpriteProperty.X)
+    y = Cursor.get(LedSpriteProperty.Y)
+    removed = False
+    remaining_notes = []
+    for note in notes:
+        if note is not None and note.get(LedSpriteProperty.X) == x and note.get(LedSpriteProperty.Y) == y:
+            note.delete()
+            removed = True
+        else:
+            remaining_notes.append(note)
+    notes = remaining_notes
+    if not removed:
+        Note2 = game.create_sprite(x, y)
+        notes.append(Note2)
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 Note2: game.LedSprite = None
 WhatNote = 0
+notes = []
 scroll5: game.LedSprite = None
 scroll4: game.LedSprite = None
 scroll3: game.LedSprite = None
