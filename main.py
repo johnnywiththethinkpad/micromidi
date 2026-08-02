@@ -69,6 +69,8 @@ def stopscrolling():
     scroll5.delete()
     Cursor = game.create_sprite(4, 0)
     scrolling = 0
+CY = 0
+CX = 0
 Note2: game.LedSprite = None
 WhatNote = 0
 scroll5: game.LedSprite = None
@@ -81,6 +83,12 @@ Cursor: game.LedSprite = None
 Cursor = game.create_sprite(4, 0)
 
 def on_forever():
+    global CX, CY
+    CX = Cursor.get(LedSpriteProperty.X)
+    CY = Cursor.get(LedSpriteProperty.Y)
+basic.forever(on_forever)
+
+def on_forever2():
     basic.pause(150)
     if Cursor.get(LedSpriteProperty.Y) == 4 and input.button_is_pressed(Button.A):
         basic.pause(150)
@@ -88,10 +96,6 @@ def on_forever():
     elif input.button_is_pressed(Button.A):
         basic.pause(150)
         Cursor.change(LedSpriteProperty.Y, 1)
-basic.forever(on_forever)
-
-def on_forever2():
-    pass
 basic.forever(on_forever2)
 
 def on_forever3():
@@ -118,6 +122,5 @@ def on_forever4():
 basic.forever(on_forever4)
 
 def on_forever5():
-    if Cursor.is_touching(Note2):
-        pass
+    pass
 basic.forever(on_forever5)
