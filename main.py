@@ -91,15 +91,19 @@ def on_forever():
 basic.forever(on_forever)
 
 def on_forever2():
+    pass
+basic.forever(on_forever2)
+
+def on_forever3():
     if Cursor.get(LedSpriteProperty.X) == 4 and input.button_is_pressed(Button.B):
         basic.pause(150)
         Cursor.set(LedSpriteProperty.X, 0)
     elif input.button_is_pressed(Button.B):
         basic.pause(150)
         Cursor.change(LedSpriteProperty.X, 1)
-basic.forever(on_forever2)
+basic.forever(on_forever3)
 
-def on_forever3():
+def on_forever4():
     global WhatNote
     if Cursor.get(LedSpriteProperty.Y) == 0:
         WhatNote = 262
@@ -111,4 +115,9 @@ def on_forever3():
         WhatNote = 392
     if Cursor.get(LedSpriteProperty.Y) == 4:
         WhatNote = 0
-basic.forever(on_forever3)
+basic.forever(on_forever4)
+
+def on_forever5():
+    if Cursor.is_touching(Note2):
+        pass
+basic.forever(on_forever5)

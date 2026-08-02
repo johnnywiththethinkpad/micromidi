@@ -85,6 +85,9 @@ basic.forever(function on_forever() {
     
 })
 basic.forever(function on_forever2() {
+    
+})
+basic.forever(function on_forever3() {
     if (Cursor.get(LedSpriteProperty.X) == 4 && input.buttonIsPressed(Button.B)) {
         basic.pause(150)
         Cursor.set(LedSpriteProperty.X, 0)
@@ -94,7 +97,7 @@ basic.forever(function on_forever2() {
     }
     
 })
-basic.forever(function on_forever3() {
+basic.forever(function on_forever4() {
     
     if (Cursor.get(LedSpriteProperty.Y) == 0) {
         WhatNote = 262
@@ -114,6 +117,12 @@ basic.forever(function on_forever3() {
     
     if (Cursor.get(LedSpriteProperty.Y) == 4) {
         WhatNote = 0
+    }
+    
+})
+basic.forever(function on_forever5() {
+    if (Cursor.isTouching(Note2)) {
+        
     }
     
 })
