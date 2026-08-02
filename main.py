@@ -1,10 +1,10 @@
 def on_pin_pressed_p0():
-    scroll()
+    pass
 input.on_pin_pressed(TouchPin.P0, on_pin_pressed_p0)
 
 def scroll():
     while scrolling == 1:
-        basic.pause(500)
+        basic.pause(600)
         scroll1.change(LedSpriteProperty.X, 1)
         scroll2.change(LedSpriteProperty.X, 1)
         scroll3.change(LedSpriteProperty.X, 1)
@@ -27,6 +27,7 @@ def on_gesture_shake():
     scroll4 = game.create_sprite(0, 3)
     scroll5 = game.create_sprite(0, 4)
     Cursor.delete()
+    scroll()
 input.on_gesture(Gesture.SHAKE, on_gesture_shake)
 
 def on_logo_pressed():
