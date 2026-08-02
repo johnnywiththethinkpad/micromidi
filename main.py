@@ -1,7 +1,7 @@
 def scroll():
-    while True:
+    while scrolling == 1:
         for index in range(5):
-            basic.pause(500)
+            basic.pause(700)
             scroll1.change(LedSpriteProperty.X, 1)
             scroll2.change(LedSpriteProperty.X, 1)
             scroll3.change(LedSpriteProperty.X, 1)
@@ -20,14 +20,15 @@ input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
 def on_gesture_shake():
     global scrolling, scroll1, scroll2, scroll3, scroll4, scroll5
-    scrolling = 1
-    Cursor.delete()
-    scroll1 = game.create_sprite(0, 0)
-    scroll2 = game.create_sprite(0, 1)
-    scroll3 = game.create_sprite(0, 2)
-    scroll4 = game.create_sprite(0, 3)
-    scroll5 = game.create_sprite(0, 4)
-    scroll()
+    if True:
+        scrolling = 1
+        Cursor.delete()
+        scroll1 = game.create_sprite(0, 0)
+        scroll2 = game.create_sprite(0, 1)
+        scroll3 = game.create_sprite(0, 2)
+        scroll4 = game.create_sprite(0, 3)
+        scroll5 = game.create_sprite(0, 4)
+        scroll()
 input.on_gesture(Gesture.SHAKE, on_gesture_shake)
 
 def on_logo_pressed():
@@ -51,12 +52,12 @@ input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 Note2: game.LedSprite = None
 WhatNote = 0
-scrolling = 0
 scroll5: game.LedSprite = None
 scroll4: game.LedSprite = None
 scroll3: game.LedSprite = None
 scroll2: game.LedSprite = None
 scroll1: game.LedSprite = None
+scrolling = 0
 Cursor: game.LedSprite = None
 Cursor = game.create_sprite(4, 0)
 

@@ -1,7 +1,7 @@
 function scroll () {
-    while (true) {
+    while (scrolling == 1) {
         for (let index = 0; index < 5; index++) {
-            basic.pause(500)
+            basic.pause(700)
             scroll1.change(LedSpriteProperty.X, 1)
             scroll2.change(LedSpriteProperty.X, 1)
             scroll3.change(LedSpriteProperty.X, 1)
@@ -20,14 +20,16 @@ input.onButtonPressed(Button.AB, function () {
     control.reset()
 })
 input.onGesture(Gesture.Shake, function () {
-    scrolling = 1
-    Cursor.delete()
-    scroll1 = game.createSprite(0, 0)
-    scroll2 = game.createSprite(0, 1)
-    scroll3 = game.createSprite(0, 2)
-    scroll4 = game.createSprite(0, 3)
-    scroll5 = game.createSprite(0, 4)
-    scroll()
+    if (true) {
+        scrolling = 1
+        Cursor.delete()
+        scroll1 = game.createSprite(0, 0)
+        scroll2 = game.createSprite(0, 1)
+        scroll3 = game.createSprite(0, 2)
+        scroll4 = game.createSprite(0, 3)
+        scroll5 = game.createSprite(0, 4)
+        scroll()
+    }
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     if (Cursor.get(LedSpriteProperty.Y) == 4) {
@@ -39,12 +41,12 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 })
 let Note2: game.LedSprite = null
 let WhatNote = 0
-let scrolling = 0
 let scroll5: game.LedSprite = null
 let scroll4: game.LedSprite = null
 let scroll3: game.LedSprite = null
 let scroll2: game.LedSprite = null
 let scroll1: game.LedSprite = null
+let scrolling = 0
 let Cursor: game.LedSprite = null
 Cursor = game.createSprite(4, 0)
 basic.forever(function () {
