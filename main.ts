@@ -7,6 +7,11 @@ function scroll () {
         scroll4.change(LedSpriteProperty.X, 1)
         scroll5.change(LedSpriteProperty.X, 1)
     }
+    scroll1.set(LedSpriteProperty.X, 0)
+    scroll2.set(LedSpriteProperty.X, 0)
+    scroll3.set(LedSpriteProperty.X, 0)
+    scroll4.set(LedSpriteProperty.X, 0)
+    scroll5.set(LedSpriteProperty.X, 0)
 }
 input.onButtonPressed(Button.AB, function () {
     Cursor.delete()
