@@ -1,10 +1,12 @@
 function scroll () {
-    basic.pause(500)
-    scroll1.change(LedSpriteProperty.X, 1)
-    scroll2.change(LedSpriteProperty.X, 1)
-    scroll3.change(LedSpriteProperty.X, 1)
-    scroll4.change(LedSpriteProperty.X, 1)
-    scroll5.change(LedSpriteProperty.X, 1)
+    for (let index = 0; index < 4; index++) {
+        basic.pause(500)
+        scroll1.change(LedSpriteProperty.X, 1)
+        scroll2.change(LedSpriteProperty.X, 1)
+        scroll3.change(LedSpriteProperty.X, 1)
+        scroll4.change(LedSpriteProperty.X, 1)
+        scroll5.change(LedSpriteProperty.X, 1)
+    }
 }
 input.onButtonPressed(Button.AB, function () {
     Cursor.delete()
@@ -16,6 +18,7 @@ input.onGesture(Gesture.Shake, function () {
     scroll3 = game.createSprite(0, 2)
     scroll4 = game.createSprite(0, 3)
     scroll5 = game.createSprite(0, 4)
+    scroll()
     Cursor.delete()
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {

@@ -1,14 +1,11 @@
-def on_pin_pressed_p0():
-    scroll()
-input.on_pin_pressed(TouchPin.P0, on_pin_pressed_p0)
-
 def scroll():
-    basic.pause(500)
-    scroll1.change(LedSpriteProperty.X, 1)
-    scroll2.change(LedSpriteProperty.X, 1)
-    scroll3.change(LedSpriteProperty.X, 1)
-    scroll4.change(LedSpriteProperty.X, 1)
-    scroll5.change(LedSpriteProperty.X, 1)
+    for index in range(4):
+        basic.pause(500)
+        scroll1.change(LedSpriteProperty.X, 1)
+        scroll2.change(LedSpriteProperty.X, 1)
+        scroll3.change(LedSpriteProperty.X, 1)
+        scroll4.change(LedSpriteProperty.X, 1)
+        scroll5.change(LedSpriteProperty.X, 1)
 
 def on_button_pressed_ab():
     Cursor.delete()
@@ -22,6 +19,7 @@ def on_gesture_shake():
     scroll3 = game.create_sprite(0, 2)
     scroll4 = game.create_sprite(0, 3)
     scroll5 = game.create_sprite(0, 4)
+    scroll()
     Cursor.delete()
 input.on_gesture(Gesture.SHAKE, on_gesture_shake)
 
