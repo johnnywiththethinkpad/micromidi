@@ -1,6 +1,3 @@
-input.onPinPressed(TouchPin.P0, function () {
-    scroll()
-})
 function scroll () {
     basic.pause(500)
     scroll1.change(LedSpriteProperty.X, 1)
