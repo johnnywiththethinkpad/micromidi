@@ -1,5 +1,6 @@
 input.onButtonPressed(Button.A, function () {
     stopscrolling()
+    noteplaced = 1
 })
 function scroll () {
     while (scrolling == 1) {
@@ -66,6 +67,7 @@ let scroll3: game.LedSprite = null
 let scroll2: game.LedSprite = null
 let scroll1: game.LedSprite = null
 let scrolling = 0
+let noteplaced = 0
 let Cursor: game.LedSprite = null
 Cursor = game.createSprite(4, 0)
 basic.forever(function () {
