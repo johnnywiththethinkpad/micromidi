@@ -1,5 +1,8 @@
 def on_button_pressed_a():
-    stopscrolling()
+    if scrolling == 1:
+        stopscrolling()
+    else:
+        pass
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def scroll():
@@ -23,7 +26,10 @@ def on_button_pressed_ab():
 input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
 def on_button_pressed_b():
-    stopscrolling()
+    if scrolling == 1:
+        stopscrolling()
+    else:
+        pass
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
 def on_gesture_shake():

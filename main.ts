@@ -1,5 +1,9 @@
 input.onButtonPressed(Button.A, function () {
-    stopscrolling()
+    if (scrolling == 1) {
+        stopscrolling()
+    } else {
+    	
+    }
 })
 function scroll () {
     while (scrolling == 1) {
@@ -23,7 +27,11 @@ input.onButtonPressed(Button.AB, function () {
     control.reset()
 })
 input.onButtonPressed(Button.B, function () {
-    stopscrolling()
+    if (scrolling == 1) {
+        stopscrolling()
+    } else {
+    	
+    }
 })
 input.onGesture(Gesture.Shake, function () {
     if (scrolling == 1) {
@@ -76,12 +84,12 @@ basic.forever(function () {
     if (scrolling == 1) {
     	
     } else {
-        basic.pause(100)
+        basic.pause(80)
         if (Cursor.get(LedSpriteProperty.X) == 4 && input.buttonIsPressed(Button.B)) {
-            basic.pause(100)
+            basic.pause(80)
             Cursor.set(LedSpriteProperty.X, 0)
         } else if (input.buttonIsPressed(Button.B)) {
-            basic.pause(100)
+            basic.pause(80)
             Cursor.change(LedSpriteProperty.X, 1)
         }
     }
@@ -90,12 +98,12 @@ basic.forever(function () {
     if (scrolling == 1) {
     	
     } else {
-        basic.pause(100)
+        basic.pause(80)
         if (Cursor.get(LedSpriteProperty.Y) == 4 && input.buttonIsPressed(Button.A)) {
-            basic.pause(100)
+            basic.pause(80)
             Cursor.set(LedSpriteProperty.Y, 0)
         } else if (input.buttonIsPressed(Button.A)) {
-            basic.pause(100)
+            basic.pause(80)
             Cursor.change(LedSpriteProperty.Y, 1)
         }
     }
