@@ -49,21 +49,34 @@ input.on_gesture(Gesture.SHAKE, on_gesture_shake)
 
 def on_logo_pressed():
     global Note2
-    if Cursor.get(LedSpriteProperty.Y) == 4:
-        music.play(music.create_sound_expression(WaveShape.SQUARE,
-                200,
-                1,
+    if Note2 != None and Cursor.is_touching(Note2):
+        music.play(music.create_sound_expression(WaveShape.NOISE,
+                54,
+                54,
                 255,
                 0,
-                100,
+                500,
                 SoundExpressionEffect.NONE,
-                InterpolationCurve.CURVE),
-            music.PlaybackMode.UNTIL_DONE)
+                InterpolationCurve.LINEAR),
+            music.PlaybackMode.IN_BACKGROUND)
+        Note2.delete()
+        Note2 = None
     else:
-        music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
-            music.PlaybackMode.UNTIL_DONE)
-    Note2 = game.create_sprite(Cursor.get(LedSpriteProperty.X),
-        Cursor.get(LedSpriteProperty.Y))
+        if Cursor.get(LedSpriteProperty.Y) == 4:
+            music.play(music.create_sound_expression(WaveShape.SQUARE,
+                    200,
+                    1,
+                    255,
+                    0,
+                    100,
+                    SoundExpressionEffect.NONE,
+                    InterpolationCurve.CURVE),
+                music.PlaybackMode.UNTIL_DONE)
+        else:
+            music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
+                music.PlaybackMode.IN_BACKGROUND)
+        Note2 = game.create_sprite(Cursor.get(LedSpriteProperty.X),
+            Cursor.get(LedSpriteProperty.Y))
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 def stopscrolling():
@@ -77,7 +90,6 @@ def stopscrolling():
     scrolling = 0
 CY = 0
 CX = 0
-Note2: game.LedSprite = None
 WhatNote = 0
 scroll5: game.LedSprite = None
 scroll4: game.LedSprite = None
@@ -86,41 +98,39 @@ scroll2: game.LedSprite = None
 scroll1: game.LedSprite = None
 scrolling = 0
 Cursor: game.LedSprite = None
+basic.show_leds("""
+    . # . # .
+    # . # . #
+    # # # # #
+    # . # . #
+    # . # . #
+    """)
+music.play(music.builtin_playable_sound_effect(soundExpression.spring),
+    music.PlaybackMode.UNTIL_DONE)
+basic.show_leds("""
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    """)
+Note2: game.LedSprite = None
 Cursor = game.create_sprite(4, 0)
 
 def on_forever():
-    global CX, CY
-    CX = Cursor.get(LedSpriteProperty.X)
-    CY = Cursor.get(LedSpriteProperty.Y)
+    if scrolling == 1:
+        pass
+    else:
+        basic.pause(80)
+        if Cursor.get(LedSpriteProperty.Y) == 4 and input.button_is_pressed(Button.A):
+            basic.pause(80)
+            Cursor.set(LedSpriteProperty.Y, 0)
+        elif input.button_is_pressed(Button.A):
+            basic.pause(80)
+            Cursor.change(LedSpriteProperty.Y, 1)
 basic.forever(on_forever)
 
 def on_forever2():
-    if scrolling == 1:
-        pass
-    else:
-        basic.pause(100)
-        if Cursor.get(LedSpriteProperty.X) == 4 and input.button_is_pressed(Button.B):
-            basic.pause(100)
-            Cursor.set(LedSpriteProperty.X, 0)
-        elif input.button_is_pressed(Button.B):
-            basic.pause(100)
-            Cursor.change(LedSpriteProperty.X, 1)
-basic.forever(on_forever2)
-
-def on_forever3():
-    if scrolling == 1:
-        pass
-    else:
-        basic.pause(100)
-        if Cursor.get(LedSpriteProperty.Y) == 4 and input.button_is_pressed(Button.A):
-            basic.pause(100)
-            Cursor.set(LedSpriteProperty.Y, 0)
-        elif input.button_is_pressed(Button.A):
-            basic.pause(100)
-            Cursor.change(LedSpriteProperty.Y, 1)
-basic.forever(on_forever3)
-
-def on_forever4():
     global WhatNote
     if Cursor.get(LedSpriteProperty.Y) == 0:
         WhatNote = 262
@@ -132,8 +142,23 @@ def on_forever4():
         WhatNote = 392
     if Cursor.get(LedSpriteProperty.Y) == 4:
         WhatNote = 0
-basic.forever(on_forever4)
+basic.forever(on_forever2)
 
-def on_forever5():
-    pass
-basic.forever(on_forever5)
+def on_forever3():
+    global CX, CY
+    CX = Cursor.get(LedSpriteProperty.X)
+    CY = Cursor.get(LedSpriteProperty.Y)
+basic.forever(on_forever3)
+
+def on_forever4():
+    if scrolling == 1:
+        pass
+    else:
+        basic.pause(80)
+        if Cursor.get(LedSpriteProperty.X) == 4 and input.button_is_pressed(Button.B):
+            basic.pause(80)
+            Cursor.set(LedSpriteProperty.X, 0)
+        elif input.button_is_pressed(Button.B):
+            basic.pause(80)
+            Cursor.change(LedSpriteProperty.X, 1)
+basic.forever(on_forever4)
