@@ -73,22 +73,31 @@ basic.forever(function () {
     CY = Cursor.get(LedSpriteProperty.Y)
 })
 basic.forever(function () {
-    basic.pause(150)
-    if (Cursor.get(LedSpriteProperty.Y) == 4 && input.buttonIsPressed(Button.A)) {
-        basic.pause(150)
-        Cursor.set(LedSpriteProperty.Y, 0)
-    } else if (input.buttonIsPressed(Button.A)) {
-        basic.pause(150)
-        Cursor.change(LedSpriteProperty.Y, 1)
+    if (scrolling == 1) {
+    	
+    } else {
+        basic.pause(100)
+        if (Cursor.get(LedSpriteProperty.X) == 4 && input.buttonIsPressed(Button.B)) {
+            basic.pause(100)
+            Cursor.set(LedSpriteProperty.X, 0)
+        } else if (input.buttonIsPressed(Button.B)) {
+            basic.pause(100)
+            Cursor.change(LedSpriteProperty.X, 1)
+        }
     }
 })
 basic.forever(function () {
-    if (Cursor.get(LedSpriteProperty.X) == 4 && input.buttonIsPressed(Button.B)) {
-        basic.pause(150)
-        Cursor.set(LedSpriteProperty.X, 0)
-    } else if (input.buttonIsPressed(Button.B)) {
-        basic.pause(150)
-        Cursor.change(LedSpriteProperty.X, 1)
+    if (scrolling == 1) {
+    	
+    } else {
+        basic.pause(100)
+        if (Cursor.get(LedSpriteProperty.Y) == 4 && input.buttonIsPressed(Button.A)) {
+            basic.pause(100)
+            Cursor.set(LedSpriteProperty.Y, 0)
+        } else if (input.buttonIsPressed(Button.A)) {
+            basic.pause(100)
+            Cursor.change(LedSpriteProperty.Y, 1)
+        }
     }
 })
 basic.forever(function () {

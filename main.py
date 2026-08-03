@@ -89,22 +89,29 @@ def on_forever():
 basic.forever(on_forever)
 
 def on_forever2():
-    basic.pause(150)
-    if Cursor.get(LedSpriteProperty.Y) == 4 and input.button_is_pressed(Button.A):
-        basic.pause(150)
-        Cursor.set(LedSpriteProperty.Y, 0)
-    elif input.button_is_pressed(Button.A):
-        basic.pause(150)
-        Cursor.change(LedSpriteProperty.Y, 1)
+    if scrolling == 1:
+        pass
+    else:
+        basic.pause(100)
+        if Cursor.get(LedSpriteProperty.X) == 4 and input.button_is_pressed(Button.B):
+            basic.pause(100)
+            Cursor.set(LedSpriteProperty.X, 0)
+        elif input.button_is_pressed(Button.B):
+            basic.pause(100)
+            Cursor.change(LedSpriteProperty.X, 1)
 basic.forever(on_forever2)
 
 def on_forever3():
-    if Cursor.get(LedSpriteProperty.X) == 4 and input.button_is_pressed(Button.B):
-        basic.pause(150)
-        Cursor.set(LedSpriteProperty.X, 0)
-    elif input.button_is_pressed(Button.B):
-        basic.pause(150)
-        Cursor.change(LedSpriteProperty.X, 1)
+    if scrolling == 1:
+        pass
+    else:
+        basic.pause(100)
+        if Cursor.get(LedSpriteProperty.Y) == 4 and input.button_is_pressed(Button.A):
+            basic.pause(100)
+            Cursor.set(LedSpriteProperty.Y, 0)
+        elif input.button_is_pressed(Button.A):
+            basic.pause(100)
+            Cursor.change(LedSpriteProperty.Y, 1)
 basic.forever(on_forever3)
 
 def on_forever4():
