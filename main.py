@@ -1,12 +1,12 @@
 def on_button_pressed_a():
-    if scrolling == 1:
+    if scrolling:
         stopscrolling()
     else:
         pass
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
 def scroll():
-    while scrolling == 1:
+    while scrolling:
         for index in range(5):
             basic.pause(700)
             scroll1.change(LedSpriteProperty.X, 1)
@@ -20,13 +20,8 @@ def scroll():
         scroll4.set(LedSpriteProperty.X, 0)
         scroll5.set(LedSpriteProperty.X, 0)
 
-def on_button_pressed_ab():
-    Cursor.delete()
-    control.reset()
-input.on_button_pressed(Button.AB, on_button_pressed_ab)
-
 def on_button_pressed_b():
-    if scrolling == 1:
+    if scrolling:
         stopscrolling()
     else:
         pass
@@ -34,10 +29,10 @@ input.on_button_pressed(Button.B, on_button_pressed_b)
 
 def on_gesture_shake():
     global scrolling, scroll1, scroll2, scroll3, scroll4, scroll5
-    if scrolling == 1:
+    if scrolling:
         pass
     else:
-        scrolling = 1
+        scrolling = True
         Cursor.delete()
         scroll1 = game.create_sprite(0, 0)
         scroll2 = game.create_sprite(0, 1)
@@ -48,35 +43,38 @@ def on_gesture_shake():
 input.on_gesture(Gesture.SHAKE, on_gesture_shake)
 
 def on_logo_pressed():
-    global Note2
-    if Note2 != None and Cursor.is_touching(Note2):
-        music.play(music.create_sound_expression(WaveShape.NOISE,
-                54,
-                54,
-                255,
-                0,
-                500,
-                SoundExpressionEffect.NONE,
-                InterpolationCurve.LINEAR),
-            music.PlaybackMode.IN_BACKGROUND)
-        Note2.delete()
-        Note2 = None
-    else:
-        if Cursor.get(LedSpriteProperty.Y) == 4:
-            music.play(music.create_sound_expression(WaveShape.SQUARE,
-                    200,
-                    1,
+    global ifplaced, new_note
+    ifplaced = True
+    for note in notes_list:
+        if Cursor.is_touching(note):
+            music.play(music.create_sound_expression(WaveShape.NOISE,
+                    54,
+                    54,
                     255,
                     0,
-                    100,
+                    500,
                     SoundExpressionEffect.NONE,
-                    InterpolationCurve.CURVE),
-                music.PlaybackMode.UNTIL_DONE)
-        else:
-            music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
+                    InterpolationCurve.LINEAR),
                 music.PlaybackMode.IN_BACKGROUND)
-        Note2 = game.create_sprite(Cursor.get(LedSpriteProperty.X),
-            Cursor.get(LedSpriteProperty.Y))
+            note.delete()
+            notes_list.remove_element(note)
+            return
+    if Cursor.get(LedSpriteProperty.Y) == 4:
+        music.play(music.create_sound_expression(WaveShape.SQUARE,
+                200,
+                1,
+                255,
+                0,
+                100,
+                SoundExpressionEffect.NONE,
+                InterpolationCurve.CURVE),
+            music.PlaybackMode.UNTIL_DONE)
+    else:
+        music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
+            music.PlaybackMode.IN_BACKGROUND)
+    new_note = game.create_sprite(Cursor.get(LedSpriteProperty.X),
+        Cursor.get(LedSpriteProperty.Y))
+    notes_list.append(new_note)
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 def stopscrolling():
@@ -87,38 +85,25 @@ def stopscrolling():
     scroll4.delete()
     scroll5.delete()
     Cursor = game.create_sprite(4, 0)
-    scrolling = 0
+    scrolling = False
 CY = 0
 CX = 0
+new_note: game.LedSprite = None
 WhatNote = 0
+ifplaced = False
 scroll5: game.LedSprite = None
 scroll4: game.LedSprite = None
 scroll3: game.LedSprite = None
 scroll2: game.LedSprite = None
 scroll1: game.LedSprite = None
-scrolling = 0
+scrolling = False
 Cursor: game.LedSprite = None
-basic.show_leds("""
-    . # . # .
-    # . # . #
-    # # # # #
-    # . # . #
-    # . # . #
-    """)
-music.play(music.builtin_playable_sound_effect(soundExpression.spring),
-    music.PlaybackMode.UNTIL_DONE)
-basic.show_leds("""
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . .
-    """)
-Note2: game.LedSprite = None
+# FIX: Changed single Note2 variable into an empty list to track multiple sprites
+notes_list: List[game.LedSprite] = []
 Cursor = game.create_sprite(4, 0)
 
 def on_forever():
-    if scrolling == 1:
+    if scrolling:
         pass
     else:
         basic.pause(80)
@@ -151,7 +136,7 @@ def on_forever3():
 basic.forever(on_forever3)
 
 def on_forever4():
-    if scrolling == 1:
+    if scrolling:
         pass
     else:
         basic.pause(80)

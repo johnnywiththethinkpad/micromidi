@@ -1,13 +1,12 @@
-input.onButtonPressed(Button.A, function on_button_pressed_a() {
-    if (scrolling == 1) {
+input.onButtonPressed(Button.A, function () {
+    if (scrolling) {
         stopscrolling()
     } else {
-        
+    	
     }
-    
 })
-function scroll() {
-    while (scrolling == 1) {
+function scroll () {
+    while (scrolling) {
         for (let index = 0; index < 5; index++) {
             basic.pause(700)
             scroll1.change(LedSpriteProperty.X, 1)
@@ -23,25 +22,18 @@ function scroll() {
         scroll5.set(LedSpriteProperty.X, 0)
     }
 }
-
-input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
-    Cursor.delete()
-    control.reset()
-})
-input.onButtonPressed(Button.B, function on_button_pressed_b() {
-    if (scrolling == 1) {
+input.onButtonPressed(Button.B, function () {
+    if (scrolling) {
         stopscrolling()
     } else {
-        
+    	
     }
-    
 })
-input.onGesture(Gesture.Shake, function on_gesture_shake() {
-    
-    if (scrolling == 1) {
-        
+input.onGesture(Gesture.Shake, function () {
+    if (scrolling) {
+    	
     } else {
-        scrolling = 1
+        scrolling = true
         Cursor.delete()
         scroll1 = game.createSprite(0, 0)
         scroll2 = game.createSprite(0, 1)
@@ -50,66 +42,52 @@ input.onGesture(Gesture.Shake, function on_gesture_shake() {
         scroll5 = game.createSprite(0, 4)
         scroll()
     }
-    
 })
-input.onLogoEvent(TouchButtonEvent.Pressed, function on_logo_pressed() {
-    
-    if (Note2 != null && Cursor.isTouching(Note2)) {
-        music.play(music.createSoundExpression(WaveShape.Noise, 54, 54, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        Note2.delete()
-        Note2 = null
-    } else {
-        if (Cursor.get(LedSpriteProperty.Y) == 4) {
-            music.play(music.createSoundExpression(WaveShape.Square, 200, 1, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
-        } else {
-            music.play(music.tonePlayable(WhatNote, music.beat(BeatFraction.Whole)), music.PlaybackMode.InBackground)
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    ifplaced = true
+    for (let note of notes_list) {
+        if (Cursor.isTouching(note)) {
+            music.play(music.createSoundExpression(WaveShape.Noise, 54, 54, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            note.delete()
+            notes_list.removeElement(note)
+return
         }
-        
-        Note2 = game.createSprite(Cursor.get(LedSpriteProperty.X), Cursor.get(LedSpriteProperty.Y))
     }
-    
+    if (Cursor.get(LedSpriteProperty.Y) == 4) {
+        music.play(music.createSoundExpression(WaveShape.Square, 200, 1, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
+    } else {
+        music.play(music.tonePlayable(WhatNote, music.beat(BeatFraction.Whole)), music.PlaybackMode.InBackground)
+    }
+    new_note = game.createSprite(Cursor.get(LedSpriteProperty.X), Cursor.get(LedSpriteProperty.Y))
+    notes_list.push(new_note)
 })
-function stopscrolling() {
-    
+function stopscrolling () {
     scroll1.delete()
     scroll2.delete()
     scroll3.delete()
     scroll4.delete()
     scroll5.delete()
     Cursor = game.createSprite(4, 0)
-    scrolling = 0
+    scrolling = false
 }
-
 let CY = 0
 let CX = 0
+let new_note: game.LedSprite = null
 let WhatNote = 0
-let scroll5 : game.LedSprite = null
-let scroll4 : game.LedSprite = null
-let scroll3 : game.LedSprite = null
-let scroll2 : game.LedSprite = null
-let scroll1 : game.LedSprite = null
-let scrolling = 0
-let Cursor : game.LedSprite = null
-basic.showLeds(`
-    . # . # .
-    # . # . #
-    # # # # #
-    # . # . #
-    # . # . #
-    `)
-music.play(music.builtinPlayableSoundEffect(soundExpression.spring), music.PlaybackMode.UntilDone)
-basic.showLeds(`
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . .
-    `)
-let Note2 : game.LedSprite = null
+let ifplaced = false
+let scroll5: game.LedSprite = null
+let scroll4: game.LedSprite = null
+let scroll3: game.LedSprite = null
+let scroll2: game.LedSprite = null
+let scroll1: game.LedSprite = null
+let scrolling = false
+let Cursor: game.LedSprite = null
+// FIX: Changed single Note2 variable into an empty list to track multiple sprites
+let notes_list : game.LedSprite[] = []
 Cursor = game.createSprite(4, 0)
-basic.forever(function on_forever() {
-    if (scrolling == 1) {
-        
+basic.forever(function () {
+    if (scrolling) {
+    	
     } else {
         basic.pause(80)
         if (Cursor.get(LedSpriteProperty.Y) == 4 && input.buttonIsPressed(Button.A)) {
@@ -119,41 +97,32 @@ basic.forever(function on_forever() {
             basic.pause(80)
             Cursor.change(LedSpriteProperty.Y, 1)
         }
-        
     }
-    
 })
-basic.forever(function on_forever2() {
-    
+basic.forever(function () {
     if (Cursor.get(LedSpriteProperty.Y) == 0) {
         WhatNote = 262
     }
-    
     if (Cursor.get(LedSpriteProperty.Y) == 1) {
         WhatNote = 311
     }
-    
     if (Cursor.get(LedSpriteProperty.Y) == 2) {
         WhatNote = 349
     }
-    
     if (Cursor.get(LedSpriteProperty.Y) == 3) {
         WhatNote = 392
     }
-    
     if (Cursor.get(LedSpriteProperty.Y) == 4) {
         WhatNote = 0
     }
-    
 })
-basic.forever(function on_forever3() {
-    
+basic.forever(function () {
     CX = Cursor.get(LedSpriteProperty.X)
     CY = Cursor.get(LedSpriteProperty.Y)
 })
-basic.forever(function on_forever4() {
-    if (scrolling == 1) {
-        
+basic.forever(function () {
+    if (scrolling) {
+    	
     } else {
         basic.pause(80)
         if (Cursor.get(LedSpriteProperty.X) == 4 && input.buttonIsPressed(Button.B)) {
@@ -163,7 +132,5 @@ basic.forever(function on_forever4() {
             basic.pause(80)
             Cursor.change(LedSpriteProperty.X, 1)
         }
-        
     }
-    
 })
