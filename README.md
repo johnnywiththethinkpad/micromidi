@@ -8,5 +8,6 @@ The system utilizes the on-board micro:bit physical inputs to navigate the inter
 * **Button B**: Moves the visual cursor along the **X-axis** (horizontal grid navigation).
 * **Button A**: Moves the visual cursor along the **Y-axis** (vertical grid navigation).
 * **Touch Logo**: **Places a note** at the current cursor coordinates.
-* **Button A + B (Combined)**: **Wipes all notes** clean from the memory grid to start a fresh track.
+* **Shake**: Plays the Notes
+* **A+B**: Changes Playing Mode (MIDIMODE) (BITMODE)
 
