@@ -116,7 +116,6 @@ let scroll2: game.LedSprite = null
 let scroll1: game.LedSprite = null
 let scrolling = false
 let Cursor: game.LedSprite = null
-music._playDefaultBackground(music.builtInPlayableMelody(Melodies.BaDing), music.PlaybackMode.InBackground)
 let notes_list : game.LedSprite[] = []
 Cursor = game.createSprite(4, 0)
 basic.forever(function () {
