@@ -10,4 +10,4 @@ The system utilizes the on-board micro:bit physical inputs to navigate the inter
 * **Touch Logo**: **Places a note** at the current cursor coordinates.
 * **Shake**: Plays the Notes
 * **A+B**: Changes Playing Mode (MIDIMODE) (BITMODE)
-For the microbit to actually speak to MIDI devices use hairless midi at: https://projectgus.github.io/hairless-midiserial/
+For the microbit to actually speak to MIDI devices use hairless midi at: https://projectgus.github.io/hairless-midiserial/ and to further use other DAWs you must use https://www.tobias-erichsen.de/software/loopmidi.html
