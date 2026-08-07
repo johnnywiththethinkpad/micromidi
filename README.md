@@ -12,4 +12,4 @@ The system utilizes the on-board micro:bit physical inputs to navigate the inter
 * **A+B**: Changes Playing Mode (MIDIMODE) (BITMODE)
 For the microbit to actually speak to MIDI devices use hairless midi at: https://projectgus.github.io/hairless-midiserial/ and to further use other DAWs you must use https://www.tobias-erichsen.de/software/loopmidi.html
 
-(WARNING) Midimode is very dependent on the cable you use and your setup it can skip notes or not play them at all due to the 65mhz ARM CPU inside the microbit V2
+(WARNING) Midimode is very dependent on the cable you use and your setup it can skip notes or not play them at all due to the 64MHz ARM CPU inside the microbit V2
