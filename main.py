@@ -1,4 +1,4 @@
-serial.setBaudRate(BaudRate.BaudRate115200)
+serial.set_baud_rate(BaudRate.BaudRate115200)
 def on_button_pressed_a():
     if scrolling:
         stopscrolling()
