@@ -1,3 +1,4 @@
+serial.setBaudRate(BaudRate.BaudRate115200)
 def on_button_pressed_a():
     if scrolling:
         stopscrolling()
@@ -227,13 +228,17 @@ def on_logo_pressed():
             return
     if Cursor != None:
         if Cursor.get(LedSpriteProperty.Y) == 4:
-            music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
-                music.PlaybackMode.IN_BACKGROUND)
-            serial.write_string(midinote)
+            if midimode == True:
+                serial.write_string(midinote)
+            else:
+                music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
+                    music.PlaybackMode.IN_BACKGROUND)
         else:
-            music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
-                music.PlaybackMode.IN_BACKGROUND)
-            serial.write_string(midinote)
+            if midimode == True:
+                serial.write_string(midinote)
+            else:
+                music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
+                    music.PlaybackMode.IN_BACKGROUND)
         new_note = game.create_sprite(Cursor.get(LedSpriteProperty.X),
             Cursor.get(LedSpriteProperty.Y))
         notes_list.append(new_note)
@@ -257,8 +262,8 @@ def stopscrolling():
 CY = 0
 CX = 0
 new_note: game.LedSprite = None
-midinote = ""
 WhatNote = 0
+midinote = ""
 ifplaced = False
 scroll5: game.LedSprite = None
 scroll4: game.LedSprite = None
@@ -278,6 +283,62 @@ speed_level = 1
 current_pause = 700
 
 def on_forever():
+    if scrolling:
+        pass
+    else:
+        basic.pause(80)
+        if Cursor != None and Cursor.get(LedSpriteProperty.Y) == 4 and input.button_is_pressed(Button.A):
+            basic.pause(80)
+            if Cursor != None:
+                Cursor.set(LedSpriteProperty.Y, 0)
+        elif input.button_is_pressed(Button.A):
+            basic.pause(80)
+            if Cursor != None:
+                Cursor.change(LedSpriteProperty.Y, 1)
+basic.forever(on_forever)
+
+def on_forever2():
+    global CX, CY
+    if Cursor != None:
+        CX = Cursor.get(LedSpriteProperty.X)
+        CY = Cursor.get(LedSpriteProperty.Y)
+    basic.pause(50)
+basic.forever(on_forever2)
+
+def on_forever3():
+    if scrolling:
+        pass
+    else:
+        basic.pause(80)
+        if Cursor != None and Cursor.get(LedSpriteProperty.X) == 4 and input.button_is_pressed(Button.B):
+            basic.pause(80)
+            if Cursor != None:
+                Cursor.set(LedSpriteProperty.X, 0)
+        elif input.button_is_pressed(Button.B):
+            basic.pause(80)
+            if Cursor != None:
+                Cursor.change(LedSpriteProperty.X, 1)
+basic.forever(on_forever3)
+
+def on_forever4():
+    if not (scrolling) and Cursor != None:
+        overlapping = False
+        for note2 in notes_list:
+            if Cursor.is_touching(note2):
+                overlapping = True
+                break
+        if overlapping:
+            led.unplot(CX, CY)
+            basic.pause(150)
+            led.plot(CX, CY)
+            basic.pause(150)
+        else:
+            basic.pause(100)
+    else:
+        basic.pause(200)
+basic.forever(on_forever4)
+
+def on_forever5():
     global midinote, WhatNote
     if Cursor == None:
         basic.pause(50)
@@ -308,60 +369,4 @@ def on_forever():
         else:
             WhatNote = 392
     basic.pause(50)
-basic.forever(on_forever)
-
-def on_forever2():
-    if scrolling:
-        pass
-    else:
-        basic.pause(80)
-        if Cursor != None and Cursor.get(LedSpriteProperty.Y) == 4 and input.button_is_pressed(Button.A):
-            basic.pause(80)
-            if Cursor != None:
-                Cursor.set(LedSpriteProperty.Y, 0)
-        elif input.button_is_pressed(Button.A):
-            basic.pause(80)
-            if Cursor != None:
-                Cursor.change(LedSpriteProperty.Y, 1)
-basic.forever(on_forever2)
-
-def on_forever3():
-    global CX, CY
-    if Cursor != None:
-        CX = Cursor.get(LedSpriteProperty.X)
-        CY = Cursor.get(LedSpriteProperty.Y)
-    basic.pause(50)
-basic.forever(on_forever3)
-
-def on_forever4():
-    if scrolling:
-        pass
-    else:
-        basic.pause(80)
-        if Cursor != None and Cursor.get(LedSpriteProperty.X) == 4 and input.button_is_pressed(Button.B):
-            basic.pause(80)
-            if Cursor != None:
-                Cursor.set(LedSpriteProperty.X, 0)
-        elif input.button_is_pressed(Button.B):
-            basic.pause(80)
-            if Cursor != None:
-                Cursor.change(LedSpriteProperty.X, 1)
-basic.forever(on_forever4)
-
-def on_forever5():
-    if not (scrolling) and Cursor != None:
-        overlapping = False
-        for note2 in notes_list:
-            if Cursor.is_touching(note2):
-                overlapping = True
-                break
-        if overlapping:
-            led.unplot(CX, CY)
-            basic.pause(150)
-            led.plot(CX, CY)
-            basic.pause(150)
-        else:
-            basic.pause(100)
-    else:
-        basic.pause(200)
 basic.forever(on_forever5)
