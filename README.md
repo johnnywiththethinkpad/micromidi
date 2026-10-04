@@ -14,3 +14,4 @@ For the microbit to actually speak to MIDI devices use hairless midi at: https:/
 
 (WARNING) Midimode is very dependent on the cable you use and your setup it can skip notes or not play them at all due to the 64MHz ARM CPU inside the microbit V2
 Also this does say typescript but in order for you to actually use micro:midi you must copy main.py over to a empty microsoft makecode project
+Demo URL: https://makecode.microbit.org/S57060-02624-29760-36286
