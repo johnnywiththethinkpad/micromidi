@@ -1,4 +1,3 @@
-serial.set_baud_rate(BaudRate.BaudRate115200)
 def on_button_pressed_a():
     if scrolling:
         stopscrolling()
@@ -233,12 +232,11 @@ def on_logo_pressed():
             else:
                 music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
                     music.PlaybackMode.IN_BACKGROUND)
+        elif midimode == True:
+            serial.write_string(midinote)
         else:
-            if midimode == True:
-                serial.write_string(midinote)
-            else:
-                music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
-                    music.PlaybackMode.IN_BACKGROUND)
+            music.play(music.tone_playable(WhatNote, music.beat(BeatFraction.WHOLE)),
+                music.PlaybackMode.IN_BACKGROUND)
         new_note = game.create_sprite(Cursor.get(LedSpriteProperty.X),
             Cursor.get(LedSpriteProperty.Y))
         notes_list.append(new_note)
@@ -276,6 +274,7 @@ current_pause = 0
 speed_level = 0
 Cursor: game.LedSprite = None
 notes_list: List[game.LedSprite] = []
+serial.set_baud_rate(BaudRate.BAUD_RATE115200)
 serial.redirect_to_usb()
 record.set_sample_rate(44100)
 Cursor = game.create_sprite(4, 0)
