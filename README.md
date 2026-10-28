@@ -1,6 +1,6 @@
 # micro:midi
 
-An open-source, embedded Digital Audio Workstation (DAW) and loop sequencer built for the **micro:bit v2** using Microsoft MakeCode.
+An open-source, embedded Digital Audio Workstation (DAW) and loop sequencer built for the **micro:bit v2** using Micropython.
 ## Control Layout
 
 The system utilizes the on-board micro:bit physical inputs to navigate the interface and manage the audio sequencer state:
