@@ -12,4 +12,4 @@ The system utilizes the on-board micro:bit physical inputs to navigate the inter
 * **A+B**: Changes Playing Mode (MIDIMODE) (BITMODE)
 For the microbit to actually speak to MIDI devices use hairless midi at: https://projectgus.github.io/hairless-midiserial/ and to further use other DAWs you must use https://www.tobias-erichsen.de/software/loopmidi.html
 
-Demo URL: https://makecode.microbit.org/S57060-02624-29760-36286
+https://python.microbit.org/v/3/reference Import the latest release file and you are able to use the simulator and flash it to a microbit
